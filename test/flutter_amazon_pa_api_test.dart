@@ -2,6 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 import 'package:flutter_amazon_pa_api/flutter_amazon_pa_api.dart';
 import 'dart:io' show Platform;
+import 'dart:convert';
 
 void main() {
   test('constractor', () {
@@ -35,7 +36,8 @@ void main() {
     final paapi = PaAPI(awsAccessKey, awsSecretKey)
       ..partnerTag = awsAssociateTag;
 
-    final res = await paapi.getItems(['4479302735']);
-    expect(res, {});
+    final responseBody = await paapi.getItems(['4479302735']);
+    var res = jsonDecode(responseBody);
+    expect(res['ItemsResult']['Items'][0]['ASIN'], '4479302735');
   });
 }

@@ -37,7 +37,7 @@ class PaAPI {
 
   dynamic getItems(List<String> items) {
     final body = {
-      "ItemIds": ["4479302735"],
+      "ItemIds": items,
       "Resources": [
         "BrowseNodeInfo.BrowseNodes",
         "Images.Primary.Small",
@@ -82,7 +82,7 @@ class PaAPI {
     String canonicalURL = _prepareCanonicalRequest(path, headers, body);
     String stringToSign = _prepareStringToSign(canonicalURL, currentDateTime);
     String signature = _calculateSignature(stringToSign, currentDateTime);
-    
+
     if (signature != null) {
       headers['Authorization'] =
           _buildAuthorizationString(signedHeaders, signature, currentDateTime);
