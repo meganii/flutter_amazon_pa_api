@@ -1,6 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:flutter_amazon_pa_api/flutter_amazon_pa_api.dart';
+import 'dart:io' show Platform;
 
 void main() {
   test('constractor', () {
@@ -18,7 +19,7 @@ void main() {
       ..host = 'host'
       ..path = 'path'
       ..partnerTag = 'partnerTag';
-    
+
     expect(paapi.region, 'region');
     expect(paapi.service, 'service');
     expect(paapi.host, 'host');
@@ -26,4 +27,15 @@ void main() {
     expect(paapi.partnerTag, 'partnerTag');
   });
 
+  test('get items', () async {
+    final env = Platform.environment;
+    final awsAccessKey = env['AWS_ACCESS_KEY_ID'];
+    final awsSecretKey = env['AWS_SECRET_ACCESS_KEY'];
+    final awsAssociateTag = env['AWS_ASSOCIATE_TAG'];
+    final paapi = PaAPI(awsAccessKey, awsSecretKey)
+      ..partnerTag = awsAssociateTag;
+
+    final res = await paapi.getItems(['4479302735']);
+    expect(res, {});
+  });
 }
