@@ -1,7 +1,27 @@
 library flutter_amazon_pa_api;
 
-/// A Calculator.
-class Calculator {
-  /// Returns [value] plus 1.
-  int addOne(int value) => value + 1;
+class PaAPI {
+  /// Amazon Access Key
+  String accessKey;
+
+  /// Amazon Secret Key
+  String secretKey;
+
+  /// Service name
+  String service = 'ProductAdvertisingAPI';
+
+  /// Host default=JP
+  String host = 'webservices.amazon.co.jp'; 
+
+  /// Region default=JP
+  String region = 'us-west-2';
+
+  /// API Request PATH
+  String path;
+
+  /// Amazon associate tag
+  String partnerTag;
+
+  PaAPI(this.accessKey, this.secretKey);
+
 }
