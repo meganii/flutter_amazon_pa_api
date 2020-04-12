@@ -2,6 +2,7 @@ library flutter_amazon_pa_api;
 
 import 'dart:convert';
 
+import 'package:flutter_amazon_pa_api/get_items_response.dart';
 import 'package:http/http.dart' as http;
 import 'package:crypto/crypto.dart';
 import 'package:intl/intl.dart';
@@ -35,7 +36,7 @@ class PaAPI {
 
   PaAPI(this.accessKey, this.secretKey);
 
-  dynamic getItems(List<String> items) {
+  Future<GetItemsResponse> getItems(List<String> items) async {
     final body = {
       "ItemIds": items,
       "Resources": [
@@ -54,7 +55,9 @@ class PaAPI {
       "Marketplace": this.marketplace,
       "Operation": "GetItems"
     };
-    return _post('/paapi5/getitems', body);
+    var responseBody = await _post('/paapi5/getitems', body);
+    var response = jsonDecode(responseBody);
+    return GetItemsResponse.fromJson(response);
   }
 
   Future<dynamic> _post(String path, Map<String, dynamic> body) async {
