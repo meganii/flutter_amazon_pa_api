@@ -3,6 +3,7 @@ import 'dart:io' show Platform;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_amazon_pa_api/flutter_amazon_pa_api.dart';
 import 'package:flutter_amazon_pa_api/get_items_response.dart';
+import 'package:flutter_amazon_pa_api/item.dart';
 import 'package:flutter_amazon_pa_api/item_info.dart';
 
 void main() {
@@ -42,18 +43,18 @@ void main() {
     expect(response.itemsResult.items[0].asin, '4479302735');
   });
 
-  // test('Item', () {
-  //   var responseJson = {
-  //     "ASIN": "B0199980K4",
-  //     "DetailPageURL":
-  //         "https://www.amazon.com/dp/B0199980K4?tag=xyz-20&linkCode=ogi&language=en_US&th=1&psc=1",
-  //   };
+  test('Item', () {
+    var responseJson = {
+      "ASIN": "B0199980K4",
+      "DetailPageURL":
+          "https://www.amazon.com/dp/B0199980K4?tag=xyz-20&linkCode=ogi&language=en_US&th=1&psc=1",
+    };
 
-  //   Item item = Item.fromJson(responseJson);
-  //   expect(item.asin, "B0199980K4");
-  //   expect(item.detailPageURL,
-  //       "https://www.amazon.com/dp/B0199980K4?tag=xyz-20&linkCode=ogi&language=en_US&th=1&psc=1");
-  // });
+    Item item = Item.fromJson(responseJson);
+    expect(item.asin, "B0199980K4");
+    expect(item.detailPageURL,
+        "https://www.amazon.com/dp/B0199980K4?tag=xyz-20&linkCode=ogi&language=en_US&th=1&psc=1");
+  });
 
   test('itemsResult', () {
     var reponseJson = {
@@ -84,22 +85,4 @@ void main() {
     expect(itemInfo.title.label, "Title");
     expect(itemInfo.title.locale, "en_US");
   });
-
-  // test('Get Item with ', () async {
-  //   final env = Platform.environment;
-  //   final awsAccessKey = env['AWS_ACCESS_KEY_ID'];
-  //   final awsSecretKey = env['AWS_SECRET_ACCESS_KEY'];
-  //   final awsAssociateTag = env['AWS_ASSOCIATE_TAG'];
-  //   final paapi = PaAPI(awsAccessKey, awsSecretKey)
-  //     ..partnerTag = awsAssociateTag;
-
-  //   var responseBody = await paapi.getItems(['4479302735']);
-  //   print(responseBody);
-  //   var results = jsonDecode(responseBody);
-  //   print("-----\n");
-  //   print(results);
-  //   ItemsResult itemResult = ItemsResult.fromJson(results);
-  //   print(itemResult.items);
-  // });
-
 }
