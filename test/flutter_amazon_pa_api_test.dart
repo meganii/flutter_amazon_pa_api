@@ -1,8 +1,10 @@
-import 'package:flutter_test/flutter_test.dart';
-
-import 'package:flutter_amazon_pa_api/flutter_amazon_pa_api.dart';
 import 'dart:io' show Platform;
 import 'dart:convert';
+
+import 'package:flutter_test/flutter_test.dart';
+import 'package:flutter_amazon_pa_api/flutter_amazon_pa_api.dart';
+import 'package:flutter_amazon_pa_api/item.dart';
+import 'package:flutter_amazon_pa_api/item_info.dart';
 
 void main() {
   test('constractor', () {
@@ -39,5 +41,33 @@ void main() {
     final responseBody = await paapi.getItems(['4479302735']);
     var res = jsonDecode(responseBody);
     expect(res['ItemsResult']['Items'][0]['ASIN'], '4479302735');
+  });
+
+  test('Item', () {
+    var responseJson = {
+      "ASIN": "B0199980K4",
+      "DetailPageURL":
+          "https://www.amazon.com/dp/B0199980K4?tag=xyz-20&linkCode=ogi&language=en_US&th=1&psc=1",
+    };
+
+    Item item = Item.fromJson(responseJson);
+    expect(item.asin, "B0199980K4");
+    expect(item.detailPageURL,
+        "https://www.amazon.com/dp/B0199980K4?tag=xyz-20&linkCode=ogi&language=en_US&th=1&psc=1");
+  });
+
+  test('Title', () {
+    var responseJson = {
+      "Title": {
+        "DisplayValue": "Star Trek II: The Wrath of Khan",
+        "Label": "Title",
+        "Locale": "en_US"
+      },
+    };
+
+    ItemInfo itemInfo = ItemInfo.fromJson(responseJson);
+    expect(itemInfo.title.displayValue, "Star Trek II: The Wrath of Khan");
+    expect(itemInfo.title.label, "Title");
+    expect(itemInfo.title.locale, "en_US");
   });
 }
