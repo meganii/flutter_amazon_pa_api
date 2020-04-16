@@ -1,8 +1,8 @@
 name: flutter_amazon_pa_api
 description: A new Flutter package project.
-version: 0.0.1
-author:
-homepage:
+version: 0.0.2
+author: meganii
+homepage: https://github.com/meganii/flutter_amazon_pa_api
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
