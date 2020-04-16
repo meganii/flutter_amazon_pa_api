@@ -3,6 +3,7 @@ import 'dart:io' show Platform;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_amazon_pa_api/flutter_amazon_pa_api.dart';
 import 'package:flutter_amazon_pa_api/get_items_response.dart';
+import 'package:flutter_amazon_pa_api/images.dart';
 import 'package:flutter_amazon_pa_api/item.dart';
 import 'package:flutter_amazon_pa_api/item_info.dart';
 
@@ -39,7 +40,7 @@ void main() {
       ..partnerTag = awsAssociateTag;
 
     final response = await paapi.getItems(['4479302735']);
-    
+
     expect(response.itemsResult.items[0].asin, '4479302735');
   });
 
@@ -60,7 +61,15 @@ void main() {
     var reponseJson = {
       "ItemsResult": {
         "Items": [
-          {"ASIN": "4479302735", "DetailPageURL": "test"},
+          {
+            "ASIN": "4479302735",
+            "DetailPageURL": "test",
+            "Images": {
+              "Primary": {
+                "Small": {"URL": "", "Height": 10, "Width": 20}
+              }
+            }
+          },
           {"ASIN": "4479302736", "DetailPageURL": "test"},
         ]
       }
@@ -84,5 +93,25 @@ void main() {
     expect(itemInfo.title.displayValue, "Star Trek II: The Wrath of Khan");
     expect(itemInfo.title.label, "Title");
     expect(itemInfo.title.locale, "en_US");
+  });
+
+  test('Images', () {
+    var responseJson = {
+      "Primary": {
+        "Small": {
+          "Height": 75,
+          "URL": "https://m.media-amazon.com/images/I/41OiLOcQVJL._SL75_.jpg",
+          "Width": 46
+        }
+      }
+    };
+
+    var images = Images.fromJson(responseJson);
+    // Image(size, height, width, url)
+    var primarySmallImage = images.primary.small;
+    expect(primarySmallImage.height, 75);
+    expect(primarySmallImage.width, 46);
+    expect(primarySmallImage.url,
+        'https://m.media-amazon.com/images/I/41OiLOcQVJL._SL75_.jpg');
   });
 }

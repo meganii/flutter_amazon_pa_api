@@ -10,10 +10,14 @@ Item _$ItemFromJson(Map<String, dynamic> json) {
   return Item(
     json['ASIN'] as String,
     json['DetailPageURL'] as String,
+    json['Images'] == null
+        ? null
+        : Images.fromJson(json['Images'] as Map<String, dynamic>),
   );
 }
 
 Map<String, dynamic> _$ItemToJson(Item instance) => <String, dynamic>{
       'ASIN': instance.asin,
       'DetailPageURL': instance.detailPageURL,
+      'Images': instance.images,
     };
