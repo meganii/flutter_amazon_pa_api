@@ -40,8 +40,10 @@ void main() {
       ..partnerTag = awsAssociateTag;
 
     final response = await paapi.getItems(['4479302735']);
-
-    expect(response.itemsResult.items[0].asin, '4479302735');
+    final item = response.itemsResult.items[0];
+    expect(item.asin, '4479302735');
+    expect(item.detailPageURL, 'https://www.amazon.co.jp/dp/4479302735?tag=meganii-22&linkCode=ogi&th=1&psc=1');
+    expect(item.images.primary.medium.height, 160);
   });
 
   test('Item', () {
