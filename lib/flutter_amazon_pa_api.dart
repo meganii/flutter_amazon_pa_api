@@ -44,9 +44,6 @@ class PaAPI {
         "Images.Primary.Small",
         "Images.Primary.Medium",
         "Images.Primary.Large",
-        "Images.Variants.Small",
-        "Images.Variants.Medium",
-        "Images.Variants.Large",
         "ItemInfo.ContentInfo",
         "ItemInfo.Title"
       ],
@@ -55,8 +52,8 @@ class PaAPI {
       "Marketplace": this.marketplace,
       "Operation": "GetItems"
     };
-    var responseBody = await _post('/paapi5/getitems', body);
-    var response = jsonDecode(responseBody);
+    final responseBody = await _post('/paapi5/getitems', body);
+    final response = jsonDecode(responseBody);
     return GetItemsResponse.fromJson(response);
   }
 
