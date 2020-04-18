@@ -52,8 +52,7 @@ class PaAPI {
       "Marketplace": this.marketplace,
       "Operation": "GetItems"
     };
-    final responseBody = await _post('/paapi5/getitems', body);
-    final response = jsonDecode(responseBody);
+    final response = await _post('/paapi5/getitems', body);
     return GetItemsResponse.fromJson(response);
   }
 
@@ -62,7 +61,8 @@ class PaAPI {
     var url = 'https://$host$path';
     var response =
         await http.post(url, headers: headers, body: json.encode(body));
-    return response.body;
+    var responseBody =  utf8.decode(response.bodyBytes);
+    return jsonDecode(responseBody);
   }
 
   Map<String, String> _createHeaders(
