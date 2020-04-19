@@ -1,6 +1,6 @@
 name: flutter_amazon_pa_api
-description: A new Flutter package project.
-version: 0.0.4
+description: Flutter package of Amazon Product Advertising API v5.
+version: 0.0.5
 author: meganii
 homepage: https://github.com/meganii/flutter_amazon_pa_api
 
