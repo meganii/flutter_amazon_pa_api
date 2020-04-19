@@ -45,6 +45,7 @@ void main() {
     expect(item.detailPageURL, 'https://www.amazon.co.jp/dp/4479302735?tag=meganii-22&linkCode=ogi&th=1&psc=1');
     expect(item.images.primary.medium.height, 160);
     expect(item.itemInfo.title.displayValue, '「1日30分」を続けなさい! (だいわ文庫)');
+    expect(item.itemInfo.byLineInfo.contributors[0].name, '古市 幸雄');
   });
 
   test('Item', () {

@@ -44,6 +44,7 @@ class PaAPI {
         "Images.Primary.Small",
         "Images.Primary.Medium",
         "Images.Primary.Large",
+        "ItemInfo.ByLineInfo",
         "ItemInfo.ContentInfo",
         "ItemInfo.Title"
       ],
