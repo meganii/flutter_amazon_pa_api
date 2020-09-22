@@ -42,10 +42,26 @@ void main() {
     final response = await paapi.getItems(['4479302735']);
     final item = response.itemsResult.items[0];
     expect(item.asin, '4479302735');
-    expect(item.detailPageURL, 'https://www.amazon.co.jp/dp/4479302735?tag=meganii-22&linkCode=ogi&th=1&psc=1');
+    expect(item.detailPageURL,
+        'https://www.amazon.co.jp/dp/4479302735?tag=meganii-22&linkCode=ogi&th=1&psc=1');
     expect(item.images.primary.medium.height, 160);
     expect(item.itemInfo.title.displayValue, '「1日30分」を続けなさい! (だいわ文庫)');
     expect(item.itemInfo.byLineInfo.contributors[0].name, '古市 幸雄');
+  });
+
+  test('get items for 4478111030', () async {
+    final env = Platform.environment;
+    final awsAccessKey = env['AWS_ACCESS_KEY_ID'];
+    final awsSecretKey = env['AWS_SECRET_ACCESS_KEY'];
+    final awsAssociateTag = env['AWS_ASSOCIATE_TAG'];
+    final paapi = PaAPI(awsAccessKey, awsSecretKey)
+      ..partnerTag = awsAssociateTag;
+
+    final response = await paapi.getItems(['4478111030']);
+    final item = response.itemsResult.items[0];
+    expect(item.asin, '4478111030');
+    expect(item.detailPageURL,
+        'https://www.amazon.co.jp/dp/4478111030?tag=meganii-22&linkCode=ogi&th=1&psc=1');
   });
 
   test('Item', () {
