@@ -59,7 +59,7 @@ class PaAPI {
 
   Future<dynamic> _post(String path, Map<String, dynamic> body) async {
     var headers = _createHeaders(path, 'GetItems', body);
-    var url = 'https://$host$path';
+    var url = Uri.parse('https://$host$path');
     var response =
         await http.post(url, headers: headers, body: json.encode(body));
     var responseBody =  utf8.decode(response.bodyBytes);
